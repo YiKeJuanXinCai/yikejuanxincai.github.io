@@ -1,0 +1,261 @@
+/* ============================================================
+   site-custom.css — 本站增强样式（由本地优化生成，不改动主题原文件）
+   与主题变量联动，自动适配浅色/深色模式
+   ============================================================ */
+
+:root {
+  --brand: #6200ee;
+  --brand-soft: rgba(98, 0, 238, 0.1);
+  --shadow-sm: 0 2px 10px rgba(31, 35, 41, 0.06);
+  --shadow-md: 0 10px 28px rgba(31, 35, 41, 0.1);
+}
+
+/* ---------- 内页隐藏重复封面（仅首页保留头像区） ---------- */
+.cover:not(:has(.cover__name)) {
+  display: none;
+}
+
+/* ---------- 顶部导航：吸顶 + 毛玻璃 ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: color-mix(in srgb, var(--bg-content-color) 82%, transparent);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  backdrop-filter: saturate(160%) blur(12px);
+  border-bottom: 1px solid var(--border-color);
+}
+.logo__text {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.logo__text::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+  vertical-align: 2px;
+}
+.navbar-menu.active {
+  color: var(--brand);
+  font-weight: 600;
+  background: var(--brand-soft);
+}
+.header #btn-search:hover,
+.header #btn-toggle-dark:hover,
+.header .dropdown-icon:hover {
+  background: var(--bg-menu);
+  border-radius: 8px;
+}
+
+/* 移动端下拉菜单展开态（由 site-custom.js 切换 .open） */
+@media screen and (max-width: 764px) {
+  .dropdown-menus.open {
+    display: flex !important;
+  }
+}
+
+/* ---------- 首页封面区 ---------- */
+.cover {
+  margin: 2.2rem auto 2.6rem;
+}
+.cover .cover__avatar {
+  width: 112px;
+  height: 112px;
+  border: 4px solid var(--bg-content-color);
+  box-shadow: 0 0 0 2px var(--brand), 0 12px 28px var(--shadow-md);
+  transition: transform 0.35s ease;
+}
+.cover .cover__avatar:hover {
+  transform: scale(1.05);
+}
+.cover__name {
+  margin: 0.6rem 0 0.2rem;
+  color: var(--title-color);
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+.cover__bio {
+  margin: 0.2rem auto;
+  max-width: 560px;
+  color: var(--body-color);
+  opacity: 0.78;
+}
+.cover__social {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+.cover__social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--bg-content-color);
+  color: var(--brand);
+  border: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.cover__social a:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+.cover__social svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* ---------- 文章卡片 ---------- */
+.post-entry {
+  overflow: hidden;
+}
+.post-entry__title {
+  transition: color 0.2s ease;
+}
+.post-entry:hover .post-entry__title {
+  color: var(--brand);
+}
+.post-meta__date {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--bg-tag-color);
+  font-size: 0.82em;
+}
+.post-meta__date svg {
+  width: 13px;
+  height: 13px;
+  opacity: 0.7;
+}
+
+/* ---------- 顶部阅读进度条 ---------- */
+#site-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  z-index: 2000;
+  background: linear-gradient(90deg, var(--brand), #e040fb);
+  transition: width 0.1s linear;
+}
+
+/* ---------- 回到顶部按钮（兼容主题 #b2t 样式） ---------- */
+#b2t {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#b2t svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ---------- 搜索页 ---------- */
+#search-input {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--bg-tag-color);
+  border-bottom: none !important;
+}
+#search-input:focus {
+  background: var(--brand-soft);
+  outline: none;
+}
+.search-result__item strong {
+  color: var(--title-color);
+}
+.search-result__content {
+  margin-top: 6px;
+  font-size: 0.92em;
+  opacity: 0.82;
+  line-height: 1.6;
+}
+
+/* ---------- 空状态（标签 / 友链） ---------- */
+.empty-state {
+  text-align: center;
+  padding: 2.2rem 1rem;
+  color: var(--body-color);
+  opacity: 0.8;
+}
+.empty-state p {
+  margin: 0.4rem 0;
+}
+.empty-state .empty-hint {
+  font-size: 0.9em;
+  opacity: 0.7;
+}
+
+/* ---------- 关于 / 友链页内容 ---------- */
+.about-card {
+  display: grid;
+  gap: 0.6rem;
+}
+.about-card li {
+  margin-left: 0.6rem;
+}
+.friend-hint {
+  border: 1px dashed var(--border-color);
+  border-radius: 12px;
+  padding: 1.2rem;
+  text-align: center;
+  opacity: 0.85;
+}
+
+/* ---------- 页脚 ---------- */
+.footer {
+  padding: 0 1rem 2.4rem;
+}
+.footer .footer-links {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer .footer-links a {
+  font-size: 0.9em;
+}
+
+/* ---------- 响应式 ---------- */
+@media screen and (max-width: 764px) {
+  .cover .cover__avatar {
+    width: 92px;
+    height: 92px;
+  }
+  .cover__name {
+    font-size: 1.4rem;
+  }
+  .main {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .content-card {
+    padding: 1.4rem 1.1rem;
+  }
+}
+
+/* ---------- 深色模式微调 ---------- */
+[data-user-color-scheme="dark"] {
+  --brand: #bb86fc;
+  --brand-soft: rgba(187, 134, 252, 0.14);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-user-color-scheme]) {
+    --brand: #bb86fc;
+    --brand-soft: rgba(187, 134, 252, 0.14);
+  }
+}
